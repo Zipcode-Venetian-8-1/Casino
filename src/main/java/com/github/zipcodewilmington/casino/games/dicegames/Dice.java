@@ -12,7 +12,7 @@ public class Dice {
     }
 
     public int roll() {
-        this.value = rand.nextInt(1,7);
+ //       this.value = rand.nextInt(1,7);
         return getValue();
     }
 

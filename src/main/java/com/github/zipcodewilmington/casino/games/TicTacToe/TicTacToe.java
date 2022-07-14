@@ -1,7 +1,8 @@
 package com.github.zipcodewilmington.casino.games.TicTacToe;
-
 import com.github.zipcodewilmington.casino.GameInterface;
-import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.Player;
+
+
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -12,26 +13,46 @@ import java.util.Scanner;
 public class TicTacToe implements GameInterface {
     public static void main (String[] args){
         int attempts = 0;
+        String position= "5";
+        String[][] userInterface = {{" ", " ", " "},{" ", " ", " "},{" ", " ", " "}};
         String[][] demo = {{"a", "b", "c"}, {"d", "e", "f"}, {"g", "h", "i"}};
         displayUI(demo);
         gamePlay(attempts);
 
+
+
     }
 
-    String position= " ";
 
-    private static boolean isValidPlay (String[][]userInterface, String position ){
 
-       if (Objects.equals(userInterface[0][0], " ")){return true;}
-       else if(Objects.equals(userInterface[0][1], " ")){return true;}
-       else if(Objects.equals(userInterface[0][2], " ")){return true;}
-       else if (Objects.equals(userInterface[1][0], " ")){return true;}
-       else if (Objects.equals(userInterface[1][1], " ")){return true;}
-       else if (Objects.equals(userInterface[1][2], " ")){return true;}
-       else if (Objects.equals(userInterface[2][0], " ")){return true;}
-       else if (Objects.equals(userInterface[2][1], " ")){return true;}
-       else if (Objects.equals(userInterface[2][2], " ")){return true;}
-       else {return false;}
+    private static boolean isValidPlay (String[][]userInterface, String position){
+          switch(position) {
+              case "a":
+                  return (Objects.equals(userInterface[0][0], " "));
+              case "b":
+                  return
+                          (Objects.equals(userInterface[0][1], " "));
+              case "c":
+                  return (Objects.equals(userInterface[0][2], " "));
+              case "d":
+                  return
+                          (Objects.equals(userInterface[1][0], " "));
+              case "e":
+                  return (Objects.equals(userInterface[1][1], " "));
+              case "f":
+                  return
+                          (Objects.equals(userInterface[1][2], " "));
+              case "g":
+                  return (Objects.equals(userInterface[2][0], " "));
+              case "h":
+                  return
+                          (Objects.equals(userInterface[2][1], " "));
+              case "i":
+                  return
+                          (Objects.equals(userInterface[2][2], " "));
+              default:
+                  return true;
+          }
     }
     private static void gamePlay(int attempts) {
        // while (attempts <= 5) {
@@ -67,35 +88,46 @@ public class TicTacToe implements GameInterface {
 
     private static void userPlay(String[][] userInterface) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose a position on the board. Options are 'a' through 'i'.");
+//       while (true){
         String userInput = scanner.nextLine();
-
-        if (Objects.equals(userInput, "a")){
-            userInterface[0][0] = "X";
-        } else if (Objects.equals(userInput, "b")){
-            userInterface[0][1] = "X";
-        }else if (Objects.equals(userInput, "c")){
-            userInterface[0][2] = "X";
-        }else if (Objects.equals(userInput, "d")){
-            userInterface[1][0] = "X";
-        }else if (Objects.equals(userInput, "e")){
-            userInterface[1][1] = "X";
-        }else if (Objects.equals(userInput, "f")){
-            userInterface[1][2] = "X";
-        }else if (Objects.equals(userInput, "g")){
-            userInterface[2][0] = "X";
-        }else if (Objects.equals(userInput, "h")){
-            userInterface[2][1] = "X";
-        }else if (Objects.equals(userInput, "i")){
-            userInterface[2][2] = "X";
-        } else { System.out.println("Invalid input. Try again.");
-        }
+            System.out.println("Choose a position on the board. Options are 'a' through 'i'.");
+        playerMove(userInterface, userInput);
     }
     private static void userPlay2(String[][] userInterface) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose a position on the board. Options are 'a' through 'i'.");
         String userInput = scanner.nextLine();
+        playerMove2(userInterface, userInput);
+        // while (true){if (isValidPlay(userInterface, userInput)){
+    }
 
+    private static void playerMove(String[][] userInterface, String userInput) {
+        if (Objects.equals(userInput, "a")) {
+            userInterface[0][0] = "X";
+        } else if (Objects.equals(userInput, "b")) {
+            userInterface[0][1] = "X";
+        } else if (Objects.equals(userInput, "c")) {
+            userInterface[0][2] = "X";
+        } else if (Objects.equals(userInput, "d")) {
+            userInterface[1][0] = "X";
+        } else if (Objects.equals(userInput, "e")) {
+            userInterface[1][1] = "X";
+        } else if (Objects.equals(userInput, "f")) {
+            userInterface[1][2] = "X";
+        } else if (Objects.equals(userInput, "g")) {
+            userInterface[2][0] = "X";
+        } else if (Objects.equals(userInput, "h")) {
+            userInterface[2][1] = "X";
+        } else if (Objects.equals(userInput, "i")) {
+            userInterface[2][2] = "X";
+        } else {
+            System.out.println("Invalid input. Try again.");
+        }
+    }
+
+
+
+    private static void playerMove2(String[][] userInterface, String userInput) {
         if (Objects.equals(userInput, "a")){
             userInterface[0][0] = "O";
         } else if (Objects.equals(userInput, "b")){
@@ -117,6 +149,7 @@ public class TicTacToe implements GameInterface {
         } else { System.out.println("Invalid input. Try again.");
         }
     }
+
     private static void displayUI(String[][] userInterface) {
         System.out.println(userInterface[0][0] + " | " + userInterface[0][1] + " | " + userInterface[0][2]);
         System.out.println("- + - + -");
@@ -125,18 +158,21 @@ public class TicTacToe implements GameInterface {
         System.out.println(userInterface[2][0] + " | " + userInterface[2][1] + " | " + userInterface[2][2]);
     }
 
+
+
     @Override
-    public void add(PlayerInterface player) {
+    public void beginGame() {
 
     }
 
     @Override
-    public void remove(PlayerInterface player) {
-
+    public String printInstructions() {
+        return null;
     }
 
     @Override
-    public void run() {
+    public Player decideWinner() {
 
+        return null;
     }
 }

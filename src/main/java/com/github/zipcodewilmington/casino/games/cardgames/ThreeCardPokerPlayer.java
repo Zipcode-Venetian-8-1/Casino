@@ -5,11 +5,27 @@ import com.github.zipcodewilmington.casino.*;
 import java.util.List;
 
 public class ThreeCardPokerPlayer extends Player implements GamblingPlayer{
-    private Account account;
     private List<Card> playerHand;
 
     public ThreeCardPokerPlayer(Account account) {
         super(account);
+    }
+
+    @Override
+    public String getPlayerName() {
+        return account.getUserName();
+    }
+
+    @Override
+    public Account getPlayerAccount() {
+        return account;
+    }
+
+    public List<Card> getPlayerHand() {
+        return playerHand;
+    }
+    public void setPlayerHand(List<Card> playerHand) {
+        this.playerHand = playerHand;
     }
 
     public int playOrFold() {

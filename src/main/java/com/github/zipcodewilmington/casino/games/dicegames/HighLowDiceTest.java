@@ -1,17 +1,11 @@
-package com.github.zipcodewilmington;
+package com.github.zipcodewilmington.casino.games.dicegames;
 
 import com.github.zipcodewilmington.casino.Account;
-import com.github.zipcodewilmington.casino.games.dicegames.HighLowDice;
-import com.github.zipcodewilmington.casino.games.dicegames.HighLowDicePlayer;
-import org.junit.Assert;
-import org.junit.Test;
 
 import java.util.HashSet;
 
-public class HighLowDicePlayerTest {
-
-    @Test
-    public void test() {
+public class HighLowDiceTest {
+    public static void main(String[] args) {
         Account acc1 = new Account("linda", "asd", 10000);
         Account acc2 = new Account("adnil", "dsa", 10000);
 
@@ -29,5 +23,4 @@ public class HighLowDicePlayerTest {
         System.out.println(acc1.getBalance());
         System.out.println(acc2.getBalance());
     }
-
 }

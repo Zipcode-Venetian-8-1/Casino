@@ -13,11 +13,10 @@ import java.io.IOException;
 /**
  * Created by leon on 7/21/2020.
  */
-public class Casino implements Runnable {
+public class Casino {
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
 
-    @Override
-    public void run() {
+    public void run() throws IOException {
         String arcadeDashBoardInput;
         AccountManager accountManager = new AccountManager();
        try {

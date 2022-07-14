@@ -16,6 +16,19 @@ public class Account {
         this.balance = balance;
     }
 
+    public void deductBalance(int amount) {
+        this.balance = balance - amount;
+    }
+
+    public void addBalance(int amount) {
+        this.balance = balance + amount;
+    }
+
+    public boolean checkBalance(int amount) {
+        if (this.balance >= amount) return true;
+        else return false;
+    }
+
     public String getUserName() {
         return userName;
     }

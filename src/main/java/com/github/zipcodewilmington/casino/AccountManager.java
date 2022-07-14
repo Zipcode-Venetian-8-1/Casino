@@ -1,48 +1,48 @@
 package com.github.zipcodewilmington.casino;
 
-/**
- * Created by leon on 7/21/2020.
- * `ArcadeAccountManager` stores, manages, and retrieves `ArcadeAccount` objects
- * it is advised that every instruction in this class is logged
- */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+
 public class AccountManager {
-    /**
-     * @param accountName     name of account to be returned
-     * @param accountPassword password of account to be returned
-     * @return `ArcadeAccount` with specified `accountName` and `accountPassword`
-     */
-    public Account getAccount(String accountName, String accountPassword) {
-//        String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
-//        String currentClassName = getClass().getName();
-//        String errorMessage = "Method with name [ %s ], defined in class with name [ %s ] has  not yet been implemented";
-//        throw new RuntimeException(String.format(errorMessage, currentMethodName, currentClassName));
+
+    private HashMap<String, Account> accounts;
+    private final Path file = Paths.get("accounts.txt");
+
+    public AccountManager() throws IOException {
+        this.accounts = new HashMap<>();
+        BufferedReader reader = Files.newBufferedReader(this.file);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] acctData = line.split(",");
+            Account acct = new Account(acctData[0], acctData[1], Integer.parseInt(acctData[2]));
+            this.accounts.put(acct.getUserName(), acct);
+        }
+    }
+
+    public Account getAccount(String username, String password) {
+        if (this.accounts.containsKey(username)) {
+            Account acct = this.accounts.get(username);
+            if (acct.getPassword().equals(password)) {
+                return acct;
+            }
+        }
         return null;
     }
 
-    /**
-     * logs & creates a new `ArcadeAccount`
-     *
-     * @param accountName     name of account to be created
-     * @param accountPassword password of account to be created
-     * @return new instance of `ArcadeAccount` with specified `accountName` and `accountPassword`
-     */
-    public Account createAccount(String accountName, String accountPassword) {
-//        String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
-//        String currentClassName = getClass().getName();
-//        String errorMessage = "Method with name [ %s ], defined in class with name [ %s ] has  not yet been implemented";
-//        throw new RuntimeException(String.format(errorMessage, currentMethodName, currentClassName));
+    public Account createAccount(String username, String password) {
+
         return null;
     }
 
-    /**
-     * logs & registers a new `ArcadeAccount` to `this.getArcadeAccountList()`
-     *
-     * @param account the arcadeAccount to be added to `this.getArcadeAccountList()`
-     */
     public void registerAccount(Account account) {
-//        String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
-//        String currentClassName = getClass().getName();
-//        String errorMessage = "Method with name [ %s ], defined in class with name [ %s ] has  not yet been implemented";
-//        throw new RuntimeException(String.format(errorMessage, currentMethodName, currentClassName));
+
+    }
+
+    public void updateAccounts() throws IOException {
+
     }
 }

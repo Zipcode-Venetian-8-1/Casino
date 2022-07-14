@@ -1,6 +1,8 @@
 package com.github.zipcodewilmington.casino.games.TicTacToe;
 import com.github.zipcodewilmington.casino.GameInterface;
+
 import com.github.zipcodewilmington.casino.Player;
+
 
 
 
@@ -10,7 +12,7 @@ import java.util.Scanner;
 /**
  * Created by leon on 7/21/2020.
  */
-public class TicTacToe implements GameInterface {
+public class TicTacToe{
     public static void main (String[] args){
         int attempts = 0;
         String position= "5";
@@ -22,7 +24,6 @@ public class TicTacToe implements GameInterface {
 
 
     }
-
 
 
     private static boolean isValidPlay (String[][]userInterface, String position){
@@ -160,19 +161,5 @@ public class TicTacToe implements GameInterface {
 
 
 
-    @Override
-    public void beginGame() {
-
-    }
-
-    @Override
-    public String printInstructions() {
-        return null;
-    }
-
-    @Override
-    public Player decideWinner() {
-
-        return null;
     }
 }

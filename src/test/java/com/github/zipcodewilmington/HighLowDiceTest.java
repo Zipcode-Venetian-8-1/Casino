@@ -3,12 +3,14 @@ package com.github.zipcodewilmington;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
+
 public class HighLowDiceTest {
 
     @Test
-    public void test() { // TODO
+    public void test() throws IOException { // TODO
         // given
-        Runnable runnable = new Casino();
+        Casino runnable = new Casino();
 
         // when
         runnable.run();

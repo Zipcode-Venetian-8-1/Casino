@@ -1,17 +1,19 @@
 package com.github.zipcodewilmington.casino.games.cardgames;
 
 import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.*;
+import java.util.Scanner;
 
 public class ThreeCardPokerGame implements MultiplayerGamblingGame {
-
+    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
     private Deck deck;
     private HashSet<ThreeCardPokerPlayer> playerSet;
     private List<Card> dealerHand;
     private final int ante = 5;
     private final int betAmt = 20;
-    public Scanner scan;
 
     public ThreeCardPokerGame(HashSet<ThreeCardPokerPlayer> playerSet) {
         this.deck = new Deck();
@@ -29,6 +31,12 @@ public class ThreeCardPokerGame implements MultiplayerGamblingGame {
         threeCardHand.add(deck.dealTop());
         threeCardHand.add(deck.dealTop());
         return threeCardHand;
+    }
+
+    public void discardHand(List<Card> hand) {
+        for (Card card : hand) {
+            deck.discard(card);
+        }
     }
 
     public StringBuilder flipAllCards() {
@@ -49,6 +57,18 @@ public class ThreeCardPokerGame implements MultiplayerGamblingGame {
     @Override
     public void beginGame() {
         System.out.println(printInstructions());
+
+        for (Player player : playerSet) {
+            if(player.getAccount().getBalance() < 20) {
+                System.out.println("Go Away");
+                playerSet.remove(player);
+            }
+        }
+
+
+
+
+        // check to make sure # of players < 7
         while (true) {
             /*
                 for each player:
@@ -56,9 +76,9 @@ public class ThreeCardPokerGame implements MultiplayerGamblingGame {
                     remove from playerSet if they leave game
              */
             for (ThreeCardPokerPlayer player : playerSet) {
-                int playerInput = getNumber(player.getPlayerName() + ": (1) Place Ante  (2) Return to Lobby");
+                int playerInput = console.getIntegerInput(": (1) Place Ante  (2) Return to Lobby");
                 if (playerInput == 1) {
-                    //player.getPlayerAccount().deductBalance(ante);
+                    player.getPlayerAccount().deductBalance(ante);
                 } else if (playerInput == 2) {
                     playerSet.remove(player);
                 }
@@ -79,6 +99,7 @@ public class ThreeCardPokerGame implements MultiplayerGamblingGame {
             // determine winner for each player and add to balance with payout()
             // for each winning 3cpokerplayer payout(player.getAccount(), $$)
             //     display payouts
+            break;
         }
     }
 
@@ -92,26 +113,12 @@ public class ThreeCardPokerGame implements MultiplayerGamblingGame {
 
     @Override
     public HashSet<Player> decideWinner(HashSet<Player> players) {
+        // if playerHand <= dealerHand, remove player from players
         return null;
     }
 
     @Override
     public void payout(Account account, int payoutAmount) {
         account.setBalance(account.getBalance() + payoutAmount);
-    }
-
-    public int getNumber(String message) {
-        scan = new Scanner(System.in);
-        while (true) {
-            System.out.print(message);
-            try {
-                int input = scan.nextInt();
-                if (input < 0) continue;
-                return input;
-            }
-            catch (InputMismatchException e) {
-                System.out.println("\"" + scan.next() + "\" isn't a number!");
-            }
-        }
     }
 }

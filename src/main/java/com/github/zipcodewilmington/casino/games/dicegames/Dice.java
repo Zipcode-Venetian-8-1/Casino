@@ -16,6 +16,7 @@ public class Dice {
         return getValue();
     }
 
+
     public int getValue() {
         return this.value;
     }

@@ -15,14 +15,13 @@ import java.io.IOException;
  */
 public class Casino {
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
-
     public void run() throws IOException {
-        String arcadeDashBoardInput;
+        String dashBoardInput;
         AccountManager accountManager = new AccountManager();
-       try {
-           do {
-               arcadeDashBoardInput = getArcadeDashboardInput();
-               if ("select-game".equals(arcadeDashBoardInput)) {
+        try {
+            do {
+               dashBoardInput = getDashboardInput();
+               if ("select-game".equals(dashBoardInput)) {
                    String accountName = console.getStringInput("Enter your account name:");
                    String accountPassword = console.getStringInput("Enter your account password:");
                    Account account = accountManager.getAccount(accountName, accountPassword);
@@ -32,17 +31,17 @@ public class Casino {
                        if (gameSelectionInput.equals("SLOTS")) {
                            play(new SlotsGame(), new SlotsPlayer());
                        }
-//                    else if (gameSelectionInput.equals("BLACK JACK")) {
-//                        play(new BlackJackGame(), new BlackJackPlayer());
-//                    } else if (gameSelectionInput.equals("THREE CARD POKER")){
-//                        play(new ThreeCardPokerGame(), new ThreeCardPokerPlayer());
-//                    } else if (gameSelectionInput.equals("HI LO DICE")){
-//                        play (new HiLoDiceGame(), new HiLoDicePlayer());
-//                    } else if (gameSelectionInput.equals("ROULETTE")){
-//                        play (new RouletteGame(), new RoulettePlayer());
-//                    } else if (gameSelectionInput.equals("TIC TAC TOE")){
-//                        play (new TicTacToeGame(), new TicTacToePlayer());
-//                    }
+    //                    else if (gameSelectionInput.equals("BLACK JACK")) {
+    //                        play(new BlackJackGame(), new BlackJackPlayer());
+    //                    } else if (gameSelectionInput.equals("THREE CARD POKER")){
+    //                        play(new ThreeCardPokerGame(), new ThreeCardPokerPlayer());
+    //                    } else if (gameSelectionInput.equals("HI LO DICE")){
+    //                        play (new HiLoDiceGame(), new HiLoDicePlayer());
+    //                    } else if (gameSelectionInput.equals("ROULETTE")){
+    //                        play (new RouletteGame(), new RoulettePlayer());
+    //                    } else if (gameSelectionInput.equals("TIC TAC TOE")){
+    //                        play (new TicTacToeGame(), new TicTacToePlayer());
+    //                    }
                        else {
                            // TODO - implement better exception handling
                            String errorMessage = "[ %s ] is an invalid game selection";
@@ -57,27 +56,25 @@ public class Casino {
                        throw new RuntimeException(String.format(errorMessage, accountPassword, accountName));
 
                    }
-               } else if ("create-account".equals(arcadeDashBoardInput)) {
+               } else if ("create-account".equals(dashBoardInput)) {
                    console.println("Welcome to the account-creation screen.");
                    String accountName = console.getStringInput("Enter your account name:");
                    String accountPassword = console.getStringInput("Enter your account password:");
                    Account newAccount = accountManager.createAccount(accountName, accountPassword);
                    accountManager.registerAccount(newAccount);
                }
-           } while (!"logout".equals(arcadeDashBoardInput));
+           } while (!"logout".equals(dashBoardInput));
        } catch (RuntimeException e){System.out.println(e.getMessage());}
     }
 
-    private String getArcadeDashboardInput() {
-        return console.getStringInput("Welcome to the Arcade Dashboard!" +
+    private String getDashboardInput() {
+        return console.getStringInput("Welcome to the Venetian!" +
                 "\nFrom here, you can select any of the following options:" +
-                "\n\t[ create-account ], [select-game" +
-                "]");
+                "\n\t[ create-account ], [select-game]");
     }
 
     private String getGameSelectionInput() {
-        return console.getStringInput("Welcome to the Game Selection Dashboard!" +
-                "\nFrom here, you can select any of the following options:" +
+        return console.getStringInput("From here, you can select any of the following games:" +
                 "\n\t[ SLOTS ], [ THREE CARD POKER ], [ BLACK JACK ], [ ROULETTE ], [ HI LO DICE ], [ TIC TAC TOE ]");
     }
 

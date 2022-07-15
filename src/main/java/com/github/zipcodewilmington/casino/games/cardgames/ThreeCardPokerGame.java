@@ -114,11 +114,12 @@ public class ThreeCardPokerGame implements MultiplayerGamblingGame {
     @Override
     public HashSet<Player> decideWinner(HashSet<Player> players) {
         // if playerHand <= dealerHand, remove player from players
+        // prob need an enum for hand ranks
         return null;
     }
 
     @Override
     public void payout(Account account, int payoutAmount) {
-        account.setBalance(account.getBalance() + payoutAmount);
+        account.addBalance(payoutAmount);
     }
 }

@@ -34,8 +34,25 @@ public class AccountManager {
     }
 
     public Account createAccount(String username, String password) {
+        // Account already exists
+        if (this.accounts.containsKey(username)) {
+            return null;
+        } else {
+            Account newAcct = new Account(username, password, 1000);
+            this.accounts.put(username, newAcct);
+            return newAcct;
+        }
+    }
 
-        return null;
+    public Account createAccount(String username, String password, int startBalance) {
+        // Account already exists
+        if (this.accounts.containsKey(username)) {
+            return null;
+        } else {
+            Account newAcct = new Account(username, password, startBalance);
+            this.accounts.put(username, newAcct);
+            return newAcct;
+        }
     }
 
     public void registerAccount(Account account) {
@@ -43,6 +60,11 @@ public class AccountManager {
     }
 
     public void updateAccounts() throws IOException {
-
+        String data = "";
+        for (HashMap.Entry<String, Account> entry : this.accounts.entrySet()) {
+            data += entry.getValue().getUserName() + "," + entry.getValue().getPassword() + "," + entry.getValue().getBalance() + "\n";
+        }
+        byte[] accountsData = data.getBytes();
+        Files.write(this.file, accountsData);
     }
 }

@@ -1,26 +1,29 @@
 package com.github.zipcodewilmington.casino.games.dicegames;
 
 import com.github.zipcodewilmington.casino.Account;
+import com.github.zipcodewilmington.casino.AccountManager;
 
+import java.io.IOException;
 import java.util.HashSet;
 
 public class HighLowDiceTest {
-    public static void main(String[] args) {
-        Account acc1 = new Account("linda", "asd", 10000);
-        Account acc2 = new Account("adnil", "dsa", 10000);
+    public static void main(String[] args) throws IOException {
 
-        HighLowDicePlayer p1 = new HighLowDicePlayer(acc1);
-        HighLowDicePlayer p2 = new HighLowDicePlayer(acc2);
+        AccountManager mgr = new AccountManager();
+        mgr.createAccount("goose", "omgimagoose");
+        mgr.createAccount("duck", "omgimaduck");
 
         HashSet<HighLowDicePlayer> players = new HashSet<>();
 
-        players.add(p1);
-        players.add(p2);
+        HighLowDicePlayer goose = new HighLowDicePlayer(mgr.getAccount("goose", "omgimagoose"));
+        HighLowDicePlayer duck = new HighLowDicePlayer(mgr.getAccount("duck", "omgimaduck"));
+
+        players.add(goose);
+        players.add(duck);
 
         HighLowDice game = new HighLowDice(players);
         game.beginGame();
 
-        System.out.println(acc1.getBalance());
-        System.out.println(acc2.getBalance());
+        mgr.updateAccounts();
     }
 }

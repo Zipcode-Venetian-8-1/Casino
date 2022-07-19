@@ -6,6 +6,7 @@ import com.github.zipcodewilmington.casino.games.roulette.typeofbet.OddOrEven;
 import com.github.zipcodewilmington.casino.games.roulette.typeofbet.RedOrBlack;
 import com.github.zipcodewilmington.casino.games.roulette.typeofbet.StreetBet;
 import com.github.zipcodewilmington.casino.games.roulette.utilroulette.IOConsoleReader;
+import com.github.zipcodewilmington.utils.Sleep;
 
 
 public class Roulette implements GamblingGameInterface {
@@ -30,7 +31,7 @@ public class Roulette implements GamblingGameInterface {
     }
 
     public void play(Account account) {
-        System.out.print(printInstructions());
+        printInstructions();
 
         while (true) {
                  {
@@ -79,6 +80,8 @@ public class Roulette implements GamblingGameInterface {
 
         int response = IOConsoleReader.promptRange("Please make a choice", 1, myPossibleBets.length);
         return myPossibleBets[response - 1];
+
+
     }
 
 
@@ -95,9 +98,19 @@ public class Roulette implements GamblingGameInterface {
 
     }
 
+    public void printSleepyBannerLineByLine(String message, int milliseconds) {
+        String[] stringArray = message.split("\n");
+        int len = stringArray.length;
+        for (int i = 0; i < len; i++) {
+            Sleep.sleep(milliseconds);
+            System.out.print(stringArray[i]);
+            if (i < len - 1) System.out.print("\n");
+        }
+    }
+
     @Override
     public String printInstructions() {
-        return """ 
+        printSleepyBannerLineByLine(""" 
                                                              ============ Welcome to!============
                                                                                                                                                  \s
                 8 888888888o.      ,o888888o.     8 8888      88 8 8888         8 8888888888 8888888 8888888888 8888888 8888888888 8 8888888888  \s
@@ -121,7 +134,8 @@ public class Roulette implements GamblingGameInterface {
                                                  5. - Three in a row
                                 
                                 
-                """;
+                """, 200);
+        return null;
     }
 
 

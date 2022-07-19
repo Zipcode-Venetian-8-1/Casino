@@ -43,7 +43,7 @@ public class IOConsoleReader {
     }
 
     public static int promptRange (String prompt, int low, int hi) {
-        final String FULL_PROMPT = String.format("%s between %d and %d: ", prompt, low, hi);
+        final String FULL_PROMPT = String.format("%s between %d and %d? ", prompt, low, hi);
         int result;
         do {
             result = promptInt(FULL_PROMPT);

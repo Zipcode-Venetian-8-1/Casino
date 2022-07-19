@@ -12,14 +12,10 @@ import com.github.zipcodewilmington.casino.games.roulette.Roulette;
 import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
-import com.github.zipcodewilmington.utils.AnsiColor;
-import com.github.zipcodewilmington.utils.IOConsole;
-import com.github.zipcodewilmington.utils.Sleep;
-
+import com.github.zipcodewilmington.utils.*;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.concurrent.TimeUnit;
 
 public class Casino {
     private final IOConsole console = new IOConsole(AnsiColor.CYAN);
